@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from 'react';
+import AskAI from './components/AskAi';
+import DeployModel from './components/DeployModel';
+import InteractWithModel from './components/InteractWithModel';
+import ModelList from './components/ModelList';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Simplified Blockchain and AI App</h1>
+      <AskAI />
+      <DeployModel />
+      <InteractWithModel />
+      <ModelList />
     </div>
   );
 }

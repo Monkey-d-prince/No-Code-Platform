@@ -1,11 +1,14 @@
-const aiService = require("../services/aiService");
+// aiController.js
+const gptService = require('../services/gptService');
 
-exports.processText = async (req, res) => {
-    try {
-        const { prompt } = req.body;
-        const result = await aiService.processText(prompt);
-        res.status(200).json({ response: result });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+const askAI = async (req, res) => {
+  try {
+    const { question } = req.body;
+    const answer = await gptService.getAnswer(question);
+    res.json({ answer });
+  } catch (error) {
+    res.status(500).json({ error: 'Error getting answer from AI' });
+  }
 };
+
+module.exports = { askAI };
