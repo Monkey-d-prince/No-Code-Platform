@@ -15,6 +15,6 @@ const App = () => {
       <ModelList />
     </div>
   );
-}
+};
 
 export default App;

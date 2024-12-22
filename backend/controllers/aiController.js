@@ -1,23 +1,21 @@
-// aiController.js
-const gptService = require('../services/gptService');
+const { processText } = require('../services/aiService');
 
-const askAI = async (req, res) => {
+exports.askAI = async (req, res) => {
+  const { prompt } = req.body;
+  if (!prompt) {
+    return res.status(400).json({ error: 'Prompt is required' });
+  }
+
   try {
-    const { question } = req.body;
-    console.log('Received question:', question); // Log the received question
+    const data = await processText(prompt);
+    // Extract message content from Monster API response
+    const answer = data.choices && data.choices.length > 0 
+      ? data.choices[0].message.content 
+      : 'No response from AI';
 
-    if (!question) {
-      console.error('No question provided');
-      return res.status(400).json({ error: 'No question provided' });
-    }
-
-    const answer = await gptService.getAnswer(question);
-    console.log('AI answer:', answer); // Log the AI answer
     res.json({ answer });
-  } catch (error) {
-    console.error('Error getting answer from AI:', error.response ? error.response.data : error.message); // Log the error details
-    res.status(500).json({ error: 'Error getting answer from AI' });
+  } catch (err) {
+    console.error('Error getting answer from AI:', err.message);
+    res.status(500).json({ error: `Error getting answer from AI: ${err.message}` });
   }
 };
-
-module.exports = { askAI };
