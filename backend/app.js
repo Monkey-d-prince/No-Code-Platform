@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/api/deploy', deployModel);
-app.post('/ask', askAI);
+app.post('/api/ask', askAI); // Ensure the endpoint is correctly defined
 app.post('/api/interact', interactWithModel);
 app.get('/api/models', getModels);
 app.put('/api/models', updateModel);

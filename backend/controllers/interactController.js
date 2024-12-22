@@ -1,6 +1,4 @@
 // controllers/interactController.js
-const gptService = require('../services/gptService');
-
 const interactWithModel = async (req, res) => {
   try {
     const { model_name, input_data } = req.body;
